@@ -108,9 +108,9 @@ fun whichRookThreatens(
     rookX2: Int, rookY2: Int
 ): Int {
     return when {
-        kingX == rookX1 || kingY == rookY1 && kingX == rookX2 || kingY == rookY2 -> 3
-        kingX == rookX1 || kingY == rookY1 -> 1
+        (kingX == rookX1 || kingY == rookY1) && (kingX == rookX2 || kingY == rookY2) -> 3
         kingX == rookX2 || kingY == rookY2 -> 2
+        kingX == rookX1 || kingY == rookY1 -> 1
         else -> 0
     }
 }
@@ -146,12 +146,12 @@ fun rookOrBishopThreatens(
  * Если такой треугольник не существует, вернуть -1.
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
-    val LongSide = maxOf(a, b, c)
-    val ShortSide = minOf(a, b, c)
-    val MidSide = (a + b + c) - (LongSide) - (ShortSide)
+    val longSide = maxOf(a, b, c)
+    val shortSide = minOf(a, b, c)
+    val midSide = (a + b + c) - (longSide) - (shortSide)
     if ((a + b < c) || (a + c < b) || (b + c < a)) return -1
-    if ((sqr(ShortSide)) + (sqr(MidSide)) == sqr(LongSide)) return 1
-    if ((sqr(ShortSide)) + (sqr(MidSide)) > sqr(LongSide)) return 0
+    if ((sqr(shortSide)) + (sqr(midSide)) == sqr(longSide)) return 1
+    if ((sqr(shortSide)) + (sqr(midSide)) > sqr(longSide)) return 0
     return 2
 }
 
@@ -165,7 +165,7 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
     val end = minOf(b, d)
-    if (a in c..d ) return end - a
+    if (a in c..d) return end - a
     if (c in a..b || b in c..d) return end - c
     return -1
 }
