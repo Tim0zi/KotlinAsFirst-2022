@@ -71,13 +71,12 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * Мой возраст. Для заданного 0 < n < 200, рассматриваемого как возраст человека,
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
-fun ageDescription(age: Int): String {
-    return when {
+fun ageDescription(age: Int): String =
+    when {
         age % 10 in 2..4 && age % 100 !in 10..15 -> "$age года"
         age % 10 == 1 && age % 100 != 11 -> "$age год"
         else -> "$age лет"
     }
-}
 
 /**
  * Простая (2 балла)
@@ -131,10 +130,16 @@ fun rookOrBishopThreatens(
     rookX: Int, rookY: Int,
     bishopX: Int, bishopY: Int
 ): Int {
-    if (((kingX == rookX) || (kingY == rookY)) && (abs(kingX - bishopX) == abs(kingY - bishopY))) return 3
-    if ((kingX == rookX) || (kingY == rookY)) return 1
-    if ((abs(kingX - bishopX)) == (abs(kingY - bishopY))) return 2
-    return 0
+    val a = (kingX == rookX)
+    val b = (kingY == rookY)
+    val c = abs(kingX - bishopX)
+    val d = abs(kingY - bishopY)
+    return when {
+        (a || b) && (c == d) -> 3
+        a || b -> 1
+        c == d -> 2
+        else -> 0
+    }
 }
 
 /**
@@ -148,11 +153,13 @@ fun rookOrBishopThreatens(
 fun triangleKind(a: Double, b: Double, c: Double): Int {
     val longSide = maxOf(a, b, c)
     val shortSide = minOf(a, b, c)
-    val midSide = (a + b + c) - (longSide) - (shortSide)
-    if ((a + b < c) || (a + c < b) || (b + c < a)) return -1
-    if ((sqr(shortSide)) + (sqr(midSide)) == sqr(longSide)) return 1
-    if ((sqr(shortSide)) + (sqr(midSide)) > sqr(longSide)) return 0
-    return 2
+    val midSide = a + b + c - longSide - shortSide
+    return when {
+        (a + b < c) || (a + c < b) || (b + c < a) -> -1
+        (sqr(shortSide)) + (sqr(midSide)) == sqr(longSide) -> 1
+        (sqr(shortSide)) + (sqr(midSide)) > sqr(longSide) -> 0
+        else -> 2
+    }
 }
 
 /**
