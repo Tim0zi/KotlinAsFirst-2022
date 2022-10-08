@@ -88,7 +88,19 @@ fun digitNumber(n: Int): Int {
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int = TODO()
+fun fib(n: Int): Int {
+    var a = 1
+    var b = 1
+    var count = 1
+    var number = 1
+    while (n > count) {
+        b += number
+        number = a
+        a = b
+        count++
+    }
+    return number
+}
 
 /**
  * Простая (2 балла)
@@ -120,15 +132,7 @@ fun maxDivisor(n: Int): Int = TODO()
  * Написать функцию, которая находит, сколько шагов требуется для
  * этого для какого-либо начального X > 0.
  */
-fun collatzSteps(x: Int): Int {
-    var a = x
-    val y = 0
-    while (x != 1) {
-        if (x % 2 == 0) x / 2
-        else a = 3 * x + 1
-    }
-    return y
-}
+fun collatzSteps(x: Int): Int = TODO()
 
 /**
  * Средняя (3 балла)
@@ -137,7 +141,6 @@ fun collatzSteps(x: Int): Int {
  * минимальное число k, которое делится и на m и на n без остатка
  */
 fun lcm(m: Int, n: Int): Int = TODO()
-
 /**
  * Средняя (3 балла)
  *
@@ -154,7 +157,15 @@ fun isCoPrime(m: Int, n: Int): Boolean = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun revert(n: Int): Int = TODO()
+fun revert(n: Int): Int {
+    var a = n
+    var revert = 0
+    while (a > 0) {
+        revert = revert * 10 + a % 10
+        a /= 10
+    }
+    return revert
+}
 
 /**
  * Средняя (3 балла)
