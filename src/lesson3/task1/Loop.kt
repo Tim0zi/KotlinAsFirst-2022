@@ -2,6 +2,9 @@
 
 package lesson3.task1
 
+import kotlin.math.PI
+import kotlin.math.abs
+import kotlin.math.pow
 import kotlin.math.sqrt
 
 // Урок 3: циклы
@@ -78,7 +81,7 @@ fun digitNumber(n: Int): Int {
     do {
         number /= 10
         count++
-    } while (number != 0)
+    } while (abs(number) > 0)
     return count
 }
 
@@ -197,7 +200,20 @@ fun hasDifferentDigits(n: Int): Boolean = TODO()
  * Подумайте, как добиться более быстрой сходимости ряда при больших значениях x.
  * Использовать kotlin.math.sin и другие стандартные реализации функции синуса в этой задаче запрещается.
  */
-fun sin(x: Double, eps: Double): Double = TODO()
+fun sin(x: Double, eps: Double): Double {
+    var x1 = x % (PI * 2.0)
+    var sin = 0.0
+    var n = 1
+    var count = 0
+    while (abs(x1) >= eps) {
+        x1 = x.pow(n) / factorial(n)
+        if (count % 2 == 0) sin += x1
+        else sin -= x1
+        count++
+        n += 2
+    }
+    return sin
+}
 
 /**
  * Средняя (4 балла)
@@ -230,4 +246,14 @@ fun squareSequenceDigit(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int = TODO()
+fun fibSequenceDigit(n: Int): Int {
+    var numCounter = 1
+    val x = n
+    var count = 0
+    while (count < x) {
+        count += digitNumber(fib(numCounter))
+        numCounter++
+    }
+    val x1 = (fib(numCounter - 1) / (10.0).pow(count - x) % 10).toInt()
+    return x1
+}
