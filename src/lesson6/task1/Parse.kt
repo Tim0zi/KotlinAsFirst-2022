@@ -127,7 +127,17 @@ fun bestLongJump(jumps: String): Int = TODO()
  * При нарушении формата входной строки, а также в случае отсутствия удачных попыток,
  * вернуть -1.
  */
-fun bestHighJump(jumps: String): Int = TODO()
+fun bestHighJump(jumps: String): Int {
+    if (!Regex("""(\d+\s[+\-%]+\s?)*""").matches(jumps)) return -1
+    val str = jumps.split(" ")
+    var max = 0
+    for (i in str.indices step 2) {
+        if ("+" in str[i + 1]) {
+            if (max < str[i].toInt()) max = str[i].toInt()
+        }
+    }
+    return max
+}
 
 /**
  * Сложная (6 баллов)
@@ -162,7 +172,20 @@ fun firstDuplicateIndex(str: String): Int = TODO()
  * или пустую строку при нарушении формата строки.
  * Все цены должны быть больше нуля либо равны нулю.
  */
-fun mostExpensive(description: String): String = TODO()
+fun mostExpensive(description: String): String {
+    if (description.isEmpty()) return ""
+    val str = description.replace(";","").split(" ")
+    var result = ""
+    var max = 0.0
+    for (i in 1..str.size step 2) {
+        if (str[i].toDouble() > max) {
+            max = str[i].toDouble()
+            result = str[i - 1]
+        }
+    }
+    return result
+}
+
 
 /**
  * Сложная (6 баллов)
