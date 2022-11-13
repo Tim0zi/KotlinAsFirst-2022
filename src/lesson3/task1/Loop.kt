@@ -201,12 +201,12 @@ fun hasDifferentDigits(n: Int): Boolean = TODO()
  * Использовать kotlin.math.sin и другие стандартные реализации функции синуса в этой задаче запрещается.
  */
 fun sin(x: Double, eps: Double): Double {
-    var x1 = x % (PI * 2.0)
+    var x1 = x % (PI * 2)
     var sin = 0.0
     var n = 1
     var count = 0
     while (abs(x1) >= eps) {
-        x1 = x.pow(n) / factorial(n)
+        x1 = (x % (PI * 2)).pow(n) / factorial(n)
         if (count % 2 == 0) sin += x1
         else sin -= x1
         count++
