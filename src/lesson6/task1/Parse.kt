@@ -128,7 +128,7 @@ fun bestLongJump(jumps: String): Int = TODO()
  * вернуть -1.
  */
 fun bestHighJump(jumps: String): Int {
-    if (!Regex("""(\d+\s[+\-%]+\s?)*""").matches(jumps)) return -1
+    if (!Regex("""(\d+\s[+%-]+\s?)+""").matches(jumps)) return -1
     val str = jumps.split(" ")
     var max = 0
     for (i in str.indices step 2) {
@@ -178,7 +178,7 @@ fun mostExpensive(description: String): String {
     var result = ""
     var max = 0.0
     for (i in 1..str.size step 2) {
-        if (str[i].toDouble() > max) {
+        if (str[i].toDouble() >= max) {
             max = str[i].toDouble()
             result = str[i - 1]
         }

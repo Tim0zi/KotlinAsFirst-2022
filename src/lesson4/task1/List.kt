@@ -3,6 +3,7 @@
 package lesson4.task1
 
 import lesson1.task1.discriminant
+import lesson3.task1.minDivisor
 import kotlin.math.sqrt
 
 // Урок 4: списки
@@ -189,15 +190,13 @@ fun accumulate(list: MutableList<Int>): MutableList<Int> = TODO()
  */
 fun factorize(n: Int): List<Int> {
     var x = n
-    val divisor = mutableListOf<Int>()
-    var i = 2
+    val list = mutableListOf<Int>()
     while (x > 1) {
-        if (x % i == 0) {
-            x /= i
-            divisor += i
-        } else i += 1
+        val divisor = minDivisor(x)
+        list.add(divisor)
+        x /= divisor
     }
-    return divisor
+    return list
 }
 
 /**
@@ -239,12 +238,11 @@ fun convert(n: Int, base: Int): List<Int> {
  * (например, n.toString(base) и подобные), запрещается.
  */
 fun convertToString(n: Int, base: Int): String {
-    val x = 'a'
     val list = convert(n, base)
     return buildString {
         for (i in list) {
             if (i <= 9) append(i.toString())
-            else append(x + i - 10)
+            else append('a' + i - 10)
         }
     }
 }
