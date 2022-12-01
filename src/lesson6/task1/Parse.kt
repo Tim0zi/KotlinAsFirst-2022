@@ -180,7 +180,7 @@ fun mostExpensive(description: String): String {
     var max = 0.0
     for (i in 1..str.size step 2) {
         val x = str[i].toDouble()
-        if (x > max) {
+        if (x >= max) {
             max = x
             result = str[i - 1]
         }
