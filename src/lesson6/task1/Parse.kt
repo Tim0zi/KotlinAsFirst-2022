@@ -128,7 +128,7 @@ fun bestLongJump(jumps: String): Int = TODO()
  * вернуть -1.
  */
 fun bestHighJump(jumps: String): Int {
-    if (!Regex("""(\d+\s[+%-]+\s?[+%-]*)+""").matches(jumps)) return -1
+    if (!Regex("""\d+ [+%-]+( \d+ [+%-]+)*""").matches(jumps)) return -1
     val str = jumps.split(" ")
     var max = 0
     for (i in str.indices step 2) {
@@ -174,7 +174,7 @@ fun firstDuplicateIndex(str: String): Int = TODO()
  */
 fun mostExpensive(description: String): String {
     if (description.isEmpty()) return ""
-    if (!Regex("""([А-я]+\s\d+(\.\d*)?;?\s?)*""").matches(description)) return "Any good with price 0.0"
+    if (!Regex("""([А-я]+\s\d+(\.\d*)?;?\s?)*""").matches(description)) return ""
     val str = description.replace(";","").split(" ")
     var result = ""
     var max = 0.0
