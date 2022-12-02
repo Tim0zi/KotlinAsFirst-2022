@@ -176,7 +176,7 @@ fun firstDuplicateIndex(str: String): Int = TODO()
  */
 fun mostExpensive(description: String): String {
     if (description.isEmpty()) return ""
-    if (!Regex("""([А-я]+ \d+(\.\d+)?(; [А-я]+ \d+(\.\d+)?)*)""").matches(description)) return ""
+    if (!Regex("""\S+ \d+(\.\d+)?(; \S+ \d+(\.\d+)?)*""").matches(description)) return ""
     val str = description.replace(";","").split(" ")
     var result = ""
     var max = 0.0
