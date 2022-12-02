@@ -2,6 +2,8 @@
 
 package lesson6.task1
 
+import java.lang.IllegalArgumentException
+
 // Урок 6: разбор строк, исключения
 // Максимальное количество баллов = 13
 // Рекомендуемое количество баллов = 11
@@ -174,7 +176,7 @@ fun firstDuplicateIndex(str: String): Int = TODO()
  */
 fun mostExpensive(description: String): String {
     if (description.isEmpty()) return ""
-    if (!Regex("""([А-я]+\s\d+(\.\d*)?;?\s?)*""").matches(description)) return ""
+    if (!Regex("""([А-я]+ \d+(\.\d+)?(; [А-я]+ \d+(\.\d+)?)*)""").matches(description)) return ""
     val str = description.replace(";","").split(" ")
     var result = ""
     var max = 0.0
