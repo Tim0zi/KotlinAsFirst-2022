@@ -190,7 +190,17 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
  *     "печенье"
  *   ) -> "Мария"
  */
-fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? = TODO()
+fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
+    var minCost = Double.MAX_VALUE
+    var result: String? = null
+    for ((name, cost) in stuff) {
+        if (cost.first == kind && cost.second <= minCost) {
+            result = name
+            minCost = cost.second
+        }
+    }
+    return result
+}
 
 /**
  * Средняя (3 балла)
@@ -284,7 +294,18 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  *   findSumOfTwo(listOf(1, 2, 3), 4) -> Pair(0, 2)
  *   findSumOfTwo(listOf(1, 2, 3), 6) -> Pair(-1, -1)
  */
-fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> = TODO()
+fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
+    val map = mutableMapOf<Int, Int>()
+    for (i in list.indices) {
+        val result = number - list[i]
+        if (map.containsKey(list[i])) {
+            return Pair(map[list[i]]!!, i)
+        } else {
+            map[result] = i
+        }
+    }
+    return Pair(-1, -1)
+}
 
 /**
  * Очень сложная (8 баллов)
