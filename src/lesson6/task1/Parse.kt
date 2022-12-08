@@ -175,16 +175,17 @@ fun firstDuplicateIndex(str: String): Int = TODO()
  * Все цены должны быть больше нуля либо равны нулю.
  */
 fun mostExpensive(description: String): String {
-    if (description.isEmpty()) return ""
     if (!Regex("""\S+ \d+(\.\d+)?(; \S+ \d+(\.\d+)?)*""").matches(description)) return ""
-    val str = description.replace(";","").split(" ")
+    val str = description.split("; ")
     var result = ""
     var max = 0.0
-    for (i in 1..str.size step 2) {
-        val x = str[i].toDouble()
+    for (product in str) {
+        if (product == "") return ""
+        val list = product.split(" ")
+        val x = list[1].toDouble()
         if (x >= max) {
             max = x
-            result = str[i - 1]
+            result = list[0]
         }
     }
     return result
