@@ -2,6 +2,8 @@
 
 package lesson5.task1
 
+import java.lang.IllegalArgumentException
+
 // Урок 5: ассоциативные массивы и множества
 // Максимальное количество баллов = 14
 // Рекомендуемое количество баллов = 9
@@ -329,3 +331,29 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
  *   ) -> emptySet()
  */
 fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> = TODO()
+
+
+//fun findStation(carPetrols: Map<String, String>, gasStations: String): Map<String, String> {
+//    if (!Regex("""([А-яA-z]+:( [А-я]+ (\d+ )?- \d+(.\d+)?;)+\s?)+""").matches(gasStations)) throw IllegalArgumentException()
+//    val result = mutableMapOf<String, String>()
+//    val gasSplit = gasStations.replace(":", " ").replace("; ", "  ")
+//        .replace("-", "").replace(";", "").split("  ")
+//    val map = mutableMapOf<String, Double>()
+//    for ((key) in carPetrols) {
+//        for (i in gasSplit.indices) {
+//            val name = gasSplit[i]
+//            val type = gasSplit[1]
+//            for (j in type.indices) {
+//                val count = gasSplit[2].toDouble()
+//                if (carPetrols[key]!! in gasSplit[i] && count < map[key]!!) {
+//                    result[key] = name
+//                    map[key] = count
+//                }
+//            }
+//        }
+//    }
+//    return result
+//}
+
+
+

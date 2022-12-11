@@ -2,6 +2,7 @@
 
 package lesson7.task1
 
+import ru.spbstu.wheels.out
 import java.io.File
 
 // Урок 7: работа с файлами
@@ -63,8 +64,13 @@ fun alignFile(inputName: String, lineLength: Int, outputName: String) {
  * Подчёркивание в середине и/или в конце строк значения не имеет.
  */
 fun deleteMarked(inputName: String, outputName: String) {
-    TODO()
+    File(outputName).bufferedWriter().use {
+        for (line in File(inputName).readLines()) {
+            if (line.isEmpty() || line[0] != '_') it.write(line + "\n")
+        }
+    }
 }
+
 
 /**
  * Средняя (14 баллов)
@@ -113,8 +119,20 @@ fun sibilants(inputName: String, outputName: String) {
  *
  */
 fun centerFile(inputName: String, outputName: String) {
-    TODO()
+    var maxLength = 0
+    val writer = File(outputName).bufferedWriter()
+    for (line in File(inputName).readLines()) {
+        if (line.trim().length > maxLength) maxLength = line.trim().length
+    }
+    for (line in File(inputName).readLines()) {
+        val length = (maxLength - line.trim().length) / 2
+        writer.write(" ".repeat(length) + line.trim())
+        writer.newLine()
+    }
+    writer.close()
 }
+
+
 
 /**
  * Сложная (20 баллов)
