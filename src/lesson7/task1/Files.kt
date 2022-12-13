@@ -2,7 +2,6 @@
 
 package lesson7.task1
 
-import ru.spbstu.wheels.out
 import java.io.File
 
 // Урок 7: работа с файлами
@@ -162,7 +161,29 @@ fun centerFile(inputName: String, outputName: String) {
  * 8) Если входной файл удовлетворяет требованиям 1-7, то он должен быть в точности идентичен выходному файлу
  */
 fun alignFileByWidth(inputName: String, outputName: String) {
-    TODO()
+    val file = File(inputName).readLines()
+    val writer = File(outputName).bufferedWriter()
+    val maxLen = file.maxOfOrNull { it.trim().replace(Regex("""\s+"""), " ").length }
+    if (maxLen != null) {
+        for (line in file) {
+            val lineRepl = line.trim().replace(Regex("""\s+"""), " ")
+            val lineSplit = lineRepl.trim().split(" ").toMutableList()
+            if (lineSplit.size == 1) {
+                writer.write(lineSplit[0])
+                writer.newLine()
+                continue
+            } else if (line.isBlank()) writer.newLine()
+            val lineLen = maxLen - lineRepl.length
+            val spacesLast = lineLen / (lineSplit.size - 1) + 1
+            val spacesAdd = lineLen % (lineSplit.size - 1)
+            for (i in 0 until lineSplit.size - 1) {
+                lineSplit[i] += " ".repeat(if (i < spacesAdd) spacesLast + 1 else spacesLast)
+            }
+            writer.write(lineSplit.joinToString(""))
+            writer.newLine()
+        }
+    }
+    writer.close()
 }
 
 /**
